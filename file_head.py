@@ -1,11 +1,11 @@
 import struct#引入字节处理库
 
 def make_file_head(
-        re_file_way, size=(1024, 1024), depth=32, cd='t', zip='n'):
+        re_file_way: str, size=(1024, 1024), depth=32, cd='t', _zip='n'):
     '''
     传入文件创建的路径、大小、色深、像素排列时使用的方向与是否使用某种压缩（暂时不会开发）；
     depth目前只支持32位（透明）与24位（真彩）；
-    cd有t、v两种状态，即压缩方向为横或竖；
+    cd有t、v两种状态，即像素排列方向为横或竖；
     zip默认为n，即None；
     要提一下的是， 格式标识的长固定为6个字节，可以改变的只有2个（长宽）。
     '''
@@ -43,7 +43,7 @@ def make_file_head(
         print(format_str)
 
         bytes_pack = struct.pack(
-            format_str, size[0], size[1], depth, cd.encode('utf8'), zip.encode('utf8'))
+            format_str, size[0], size[1], depth, cd.encode('utf8'), _zip.encode('utf8'))
         #使用生成好的格式标识打包文件头信息
 
         re_image_file.write(b'5B' + size_format_str)
