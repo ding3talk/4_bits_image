@@ -19,7 +19,7 @@ def make_file_head(
         raise ValueError('使用了非支持的色深')
 
     if type(size[0]) != int or type(size[1]) != int or type(depth) != int:
-        size = int(size[0]), int(size[1]), int(depth)
+        size = int(size[0]), int(size[1])
     #如数值不为整数，转为int
 
     else:
@@ -40,7 +40,6 @@ def make_file_head(
 
         format_str = b'<' + size_format_str + b'Bss'#添加剩余三个标识的格式标识（较为固定）
         #创建表示文件头格式的字节字符串标识（struct）
-        print(format_str)
 
         bytes_pack = struct.pack(
             format_str, size[0], size[1], depth, cd.encode('utf8'), _zip.encode('utf8'))
